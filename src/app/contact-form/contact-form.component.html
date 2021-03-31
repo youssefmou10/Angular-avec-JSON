@@ -1,0 +1,84 @@
+<br>
+<form #f="ngForm" (ngSubmit)="submit(f)">
+    <div ngModelGroup="contact">
+        <div class="form-group">
+            <label for="firstName">Firstname</label>
+            <input required 
+                    minlength="4" 
+                    maxlength="10" 
+                    pattern="[a-zA-Z]+" 
+                    ngModel 
+                    name="firstname"
+                    #firstName="ngModel" 
+                    class="form-control" 
+                    id="firstName"
+                     type="text">
+            <div class="alert alert-danger" 
+                *ngIf="firstName.touched && !firstName.valid">
+                    <div *ngIf="firstName.errors.required">
+                        Ce champs est obligatoire 
+                    </div>
+                    <div *ngIf="firstName.errors.minlength">
+                        ce champs doivent avoir au moins 
+                        {{firstName.errors.minlength.actualLength}} 
+                        /{{firstName.errors.minlength.requiredLength}} 
+                        caharctere
+                    </div>
+                    <div *ngIf="firstName.errors.pattern">
+                        Ce champs doivent etre alphabet
+                    </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="lastName">
+                Lastname
+            </label>
+            <input  ngModel 
+                    name="lastname"  
+                     #lastName class="form-control" 
+                    id="lastName" 
+                    type="text">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="comment">
+            Comment
+        </label>
+        <textarea   
+                    type="text"
+                    ngModel 
+                    name="comment"  
+                     #comment class="form-control"
+                     id="comment" 
+                    >
+    </textarea>
+    </div>
+    <div class="radio" *ngFor="let method of MethodContacts">
+        <label for="">
+        <input type="radio" ngModel name="contact1" [value]="method.id">
+         {{method.name}}
+        </label>
+    </div>
+    <div class="form-group">
+        <label for="MethodContact">Méthode de conatact</label>
+        <select multiple class="form-control"id="MethodContact" ngModel name="MethodContact"   >
+            <option value=""></option>
+            <option *ngFor='let method of MethodContacts' [value]="method.id">
+                {{method.name}}
+            </option>
+        </select>
+    </div>
+    <div class="checkbox">
+        <label>
+            <input type="checkbox" ngModel name="subscribe"> S'abonner
+        </label>
+    </div>
+    <div class="from-group">
+    <button  class="btn btn-primary" [disabled]="!f.valid" >
+        Enregistrer
+    </button>
+</div>
+</form>
+
+<p>{{f.value | json}}</p>
+

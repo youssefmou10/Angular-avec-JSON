@@ -6,5 +6,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'project11';
+  title = 'project10';
+  personne = {
+    nom:"Mohamed Id brahim",
+    Tel:"0651436191",
+    adresse:null
+  }
+  /*addcourses(){
+    this.courses.push({id:6,title:"react"});
+  }*/
+    
 }
